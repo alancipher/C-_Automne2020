@@ -69,8 +69,15 @@ int main(int argc, const char** args)
        std ::cin >> points[i];
 
 
-double min ;
+double min = std:: numeric_limits<double>::infinity() ;
 
+for(int i=1; i<nb ; i++){
+ for(int j = 0; j<i; j++){
+double d = points[i].distance(points[j]);
+if (d<min)
+   min =d;
+}
+}
 
 delete[] points;
 
