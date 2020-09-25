@@ -3,6 +3,9 @@ using namespace std;
 
 int main()
 {
+     int a = 3;
+   int* const p = &a;
+
     int ageUtilisateur(18); //Une variable pour contenir l'âge de l'utilisateur
     
     int& maReference(ageUtilisateur); //Et une référence sur la variable 'ageUtilisateur'
