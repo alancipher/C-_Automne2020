@@ -12,13 +12,24 @@
 #include <string> 
 #include <sstream>
 
-std::string Carte::geocodageinverse(const Coordonnees& c) const
+//std::string Carte::geocodageinverse(const Coordonnees& c) const
+std:: string Carte :: geocodageinverse(Tableau <Route> routes,const  Coordonnees& c)const
 {
-    int adresse = 201;
-    std::string rue = "avenue_Président-Kennedy";
-    std::stringstream sstr;
-    sstr << adresse << " " << rue;
-    return sstr.str();
+ double  distMin, longueur;
+Coordonnees c,d;
+ for (int i = 0; i < routes.taille(); i++){
+     longueur =0;
+   for (int j = 1; j <routes[i].cor.taille()-1 ;i++ ){
+    c = routes[i].cor[j-1];
+    d = routes[i].cor[j];
+}
+
+}
+  //    int adresse = 201;
+    //std::string rue = "avenue_Président-Kennedy";
+   // std::stringstream sstr;
+    //sstr << adresse << " " << rue;
+    return "yes";
 }
 
 std::istream& operator >> (std::istream& is, Route& route)

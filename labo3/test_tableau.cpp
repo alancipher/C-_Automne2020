@@ -197,10 +197,14 @@ bool test7(){
 }
 
 bool test8(){
+     std::cout << "ICI1" << std::endl;
+
     std::cout << "test8() : operator ==" << std::endl;
+
     Tableau<int> t1;
     Tableau<int> t2;
-    for(int i=0;i<1024;i++){
+    for(int i=0;i<10;i++){ //1024
+         std::cout << "ICI2" << std::endl;
         t1.ajouter(i);
         t2.ajouter(i);
     }
