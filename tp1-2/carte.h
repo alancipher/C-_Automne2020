@@ -15,13 +15,20 @@
 class Route{
   // À compléter.
   // Une route devrait avoir un nom, tableau de points, deux numéros de porte (début et fin du segment).
-  friend std::istream& operator >> (std::istream&, Route&);  
+
+private :
+     char * nom ;
+     Tableau <Coordonnees> cor;
+      int  porteDebut;
+     int portFin;
+  friend std::istream& operator >> (std::istream&, Route&); 
+   friend class Carte; 
 };
 
 class Carte{
   // À compléter.
   public:
-    std::string geocodageinverse(const Coordonnees& c) const;
+    std::string geocodageinverse(Tableau <Route> routes, const Coordonnees& c) const;
   
   private:
     Tableau<Route> routes;
