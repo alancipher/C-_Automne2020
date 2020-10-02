@@ -9,11 +9,11 @@
 #include <cmath>
 #include <istream>
 #include <limits>
-#include <string> 
+#include <string>
 #include <sstream>
 
 //std::string Carte::geocodageinverse(const Coordonnees& c) const
-std:: string Carte :: geocodageinverse(Tableau <Route> routes,const  Coordonnees& c)const
+std:: string Carte :: geocodageinverse(Tableau <Route> routes,const  Coordonnees& p)const
 {
  double  distMin, longueur;
 Coordonnees c,d;
@@ -35,28 +35,28 @@ Coordonnees c,d;
 std::istream& operator >> (std::istream& is, Route& route)
 {
     // Code à compléter...
-    
-    // exemple de ligne à lire: 
+
+    // exemple de ligne à lire:
     //  Rue_Jeanne-Mance : 2020 - 2098 : (45.50838,-73.56894) , (45.50915,-73.57062) ;
     int entier;
     char temp;
     std::string chaine;
-    
+
     // Lecture du nom de rue
     is >> chaine;
     if(!is || chaine.empty()) // détecter une anomalie ou la fin du fichier...
         return is;
     is >> temp;
     assert(temp==':');
-    
+
     // Lecture de l'intervalle des numéros de porte
     is >> entier >> temp >> entier;
     assert(temp=='-');
-    
-    
+
+
     is >> temp;
     assert(temp==':');
-    
+
     // Lecture des coordonnées
     Coordonnees c;
     is >> c >> temp;
@@ -76,4 +76,3 @@ std::istream& operator >> (std::istream& is, Carte& carte)
     }
     return is;
 }
-

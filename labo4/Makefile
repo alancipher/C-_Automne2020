@@ -13,7 +13,7 @@ all : test_pile test_file lab4
 # Ensuite, la ou les ligne(s) débutant par une tabulation (\t) donne les commandes pour construire une cible.
 
 lab4: lab4.cpp pile.h file.h
-	g++ $(OPTIONS) -o lab4 lab4.cpp
+	g++ $(OPTIONS) -o -g  lab4 lab4.cpp
 
 test_pile: test_pile.cpp pile.h
 	g++ $(OPTIONS) -o test_pile test_pile.cpp

@@ -23,7 +23,7 @@ int main()
     pile2.empiler(1);
     pile2.empiler(2);
     fonction1(pile2, 3);
-
+   //ICII   
    fonction1(pile2, 4);
     fonction1(pile2, 5);
     return 0;

@@ -64,10 +64,12 @@ capacite = capacite_ ;
 template <class T>
 Tableau<T>::Tableau(const Tableau& autre)
 {
-    // À compléter
-capacite =autre.capacite;
+   capacite =autre.capacite;
 nbElements= autre.nbElements;
-elements = autre.elements;
+//elements = autre.elements;
+elements = new T [capacite];
+for (int i =0; i<nbElements; i++)
+  elements[i] = autre.elements[i];
 }
 
 template <class T>
@@ -75,7 +77,7 @@ Tableau<T>::~Tableau()
 {
     // À compléter
   delete [] elements;
-  elements = nullptr;
+  //elements = nullptr;
 }
 
 template <class T>
