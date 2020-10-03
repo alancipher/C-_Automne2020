@@ -11,8 +11,14 @@
 
 class Coordonnees {
   public:
-    double distance(const Coordonnees&) const;
+  //  Tableau(int capacite_initiale=4);
+  Coordonnees();
+  Coordonnees (double lat_,double long_);
 
+    double distance(const Coordonnees&) const;
+   Coordonnees nouveauVecteur(const Coordonnees&)const;
+   Coordonnees projectionCoor(const Coordonnees&)const;
+    Coordonnees additionner(const Coordonnees&)const;
   private:
     double latitude;
     double longitude;
@@ -22,4 +28,3 @@ class Coordonnees {
 };
 
 #endif
-

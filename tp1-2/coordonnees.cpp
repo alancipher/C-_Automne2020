@@ -11,13 +11,40 @@
 #define RAYONTERRE 6371001  // en mètres
 #define PI 3.14159265359
 
+Coordonnees :: Coordonnees(){
+  // constructeur vide a revoir
+}
 
+Coordonnees :: Coordonnees (double lat_,double long_)
+: latitude(lat_), longitude(long_)
+{
+
+}
 double Coordonnees::distance(const Coordonnees& coor) const {
   double s1 = sin((coor.latitude-latitude)/2);
   double s2 = sin((coor.longitude-longitude)/2);
   return 2*RAYONTERRE * asin(sqrt(s1*s1 + cos(latitude)*cos(coor.latitude)*s2*s2));
 }
 
+Coordonnees Coordonnees:: nouveauVecteur(const Coordonnees& coor)const{
+  double nouvLatitude = coor.latitude -latitude;
+  double nouvLongitude = coor.longitude-longitude;
+  Coordonnees nouvVecteur(nouvLatitude,nouvLongitude);
+  return nouvVecteur;
+
+}
+ Coordonnees Coordonnees :: projectionCoor(const Coordonnees& coor)const{
+   double produitCaCd = coor.latitude *latitude + coor.longitude*longitude;
+   double produitCd = pow(2,coor.latitude) + pow(2,coor.longitude);
+   double rapport = produitCaCd/ produitCd;
+   Coordonnees nouvVecteur(rapport*coor.latitude, rapport*coor.longitude);
+   return nouvVecteur;
+ }
+
+Coordonnees Coordonnees ::additionner(const Coordonnees& coor)const{
+  Coordonnees nouvPoint (coor.latitude + latitude, coor.longitude+longitude);
+  return nouvPoint;
+}
 std::istream& operator >> (std::istream& is, Coordonnees& coor) {
   char po, virgule, pf;
   is >> po;
@@ -33,11 +60,10 @@ std::istream& operator >> (std::istream& is, Coordonnees& coor) {
 }
 
 std::ostream& operator << (std::ostream& os, const Coordonnees& coor) {
-  os << "(" 
+  os << "("
      << (coor.latitude * 180.0 / PI)
-     << "," 
+     << ","
      << (coor.longitude * 180.0 / PI)
      << ")";
   return os;
 }
-

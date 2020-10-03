@@ -15,13 +15,32 @@
 //std::string Carte::geocodageinverse(const Coordonnees& c) const
 std:: string Carte :: geocodageinverse(Tableau <Route> routes,const  Coordonnees& p)const
 {
- double  distMin, longueur;
-Coordonnees c,d;
+ double  distMin = 6371001 *3, longueur, long2;
+Coordonnees c,d, prim, vecteurCD, vecteurCP, vecProject, nouvPoint;
  for (int i = 0; i < routes.taille(); i++){
      longueur =0;
    for (int j = 1; j <routes[i].cor.taille()-1 ;i++ ){
     c = routes[i].cor[j-1];
     d = routes[i].cor[j];
+    // determiner les vecteurs V(cd) et V(cp)
+    vecteurCP = c.nouveauVecteur(p);
+    vecteurCD = c.nouveauVecteur(p);
+    vecProject =  vecteurCP.projectionCoor(vecteurCD);
+      nouvPoint = c.additionner(vecProject);
+
+      if (p.distance(nouvPoint) < distMin){
+        distMin = p.distance(nouvPoint);
+      }
+   long2 = longueur + c.distance(nouvPoint);
+
+    /*  if (i ==0 et j == 1 ){
+        distMin = p.distance(nouvPoint);
+      }else if (p.distance(nouvPoint) < distMin){
+        distMin = p.distance(nouvPoint);
+      }*/
+
+
+
 }
 
 }
