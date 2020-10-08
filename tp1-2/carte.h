@@ -21,21 +21,21 @@ private :
      Tableau <Coordonnees> cor;
       int  porteDebut;
      int portFin;
-  friend std::istream& operator >> (std::istream&, Route&); 
-   friend class Carte; 
+     friend std::istream& operator >> (std::istream&, Route&);
+     friend class Carte;
 };
 
 class Carte{
   // À compléter.
   public:
-    std::string geocodageinverse(Tableau <Route> routes, const Coordonnees& c) const;
-  
+    //Carte ();
+    std::string geocodageinverse( const Coordonnees& c) const;
+
   private:
     Tableau<Route> routes;
-    
+
   friend std::istream& operator >> (std::istream&, Carte&);
 
 };
 
 #endif
-

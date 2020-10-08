@@ -17,10 +17,11 @@ int tp1(const Carte& carte, std::istream& in)
         Coordonnees c;
         in >> c;
         if(in){
-            //  std::string adresse = carte.geocodageinverse(c);
-            //std::cout << adresse << std::endl;
+           std::string adresse = carte.geocodageinverse(c);
+         std::cout << adresse << std::endl;
         }
         in >> std::ws;
+        //Tableau <Route> routes,const  Coordonnees& p
     }
     return 0; // fin normale
 }

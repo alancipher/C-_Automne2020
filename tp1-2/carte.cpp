@@ -11,11 +11,16 @@
 #include <limits>
 #include <string>
 #include <sstream>
+//#include <bits/stdc++.h>
 
 //std::string Carte::geocodageinverse(const Coordonnees& c) const
-std:: string Carte :: geocodageinverse(Tableau <Route> routes,const  Coordonnees& p)const
+//std:: string Carte :: geocodageinverse(Tableau <Route> routes,const  Coordonnees& p)const
+
+std:: string Carte :: geocodageinverse(const  Coordonnees& p)const
 {
- double  distMin = 6371001 *3, longueur, long2;
+  std ::string adresse = "";
+ double  distMin = 6371001 *3, longueur, long2, longdist;
+ int numeroPorte;
 Coordonnees c,d, prim, vecteurCD, vecteurCP, vecProject, nouvPoint;
  for (int i = 0; i < routes.taille(); i++){
      longueur =0;
@@ -26,29 +31,38 @@ Coordonnees c,d, prim, vecteurCD, vecteurCP, vecProject, nouvPoint;
     vecteurCP = c.nouveauVecteur(p);
     vecteurCD = c.nouveauVecteur(p);
     vecProject =  vecteurCP.projectionCoor(vecteurCD);
-      nouvPoint = c.additionner(vecProject);
+      nouvPoint = c.additionner(vecProject); // on va redefinir l'operateur = pour ce class
+                                            // addition de deux vecteur
 
       if (p.distance(nouvPoint) < distMin){
         distMin = p.distance(nouvPoint);
       }
    long2 = longueur + c.distance(nouvPoint);
 
-    /*  if (i ==0 et j == 1 ){
-        distMin = p.distance(nouvPoint);
-      }else if (p.distance(nouvPoint) < distMin){
-        distMin = p.distance(nouvPoint);
-      }*/
 
+   // to be test starting from here
 
+  longdist = long2 + nouvPoint.distance(d);
+  if (c.distance(nouvPoint)< nouvPoint.distance(d)){
+    numeroPorte = round((longdist -long2)/(longdist-longueur)*routes[i].porteDebut +
+                         (long2-longueur)/(longdist-longueur)* routes[i].portFin);
 
+  } else if (c.distance(nouvPoint)> nouvPoint.distance(d)){
+
+      numeroPorte = round((longdist -long2)/(longdist-longueur)*routes[i].porteDebut +
+                           (long2-longueur)/(longdist-longueur)* routes[i].portFin);
+  }
+
+        //  init.append(add);
+        //  adresse.append();
+     //std::to_string(i
+        adresse = std::to_string(numeroPorte) + " " + routes[i].nom ;
+   longueur += c.distance(d);
 }
 
 }
-  //    int adresse = 201;
-    //std::string rue = "avenue_Président-Kennedy";
-   // std::stringstream sstr;
-    //sstr << adresse << " " << rue;
-    return "yes";
+
+    return "YES";
 }
 
 std::istream& operator >> (std::istream& is, Route& route)

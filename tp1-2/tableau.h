@@ -20,6 +20,8 @@ class Tableau{
 
     // Ajouter un element à la fin
     void           ajouter(const T& element);
+    // redimensionner
+    void redimensionner();
     // Vider le tableau
     void           vider();
     // Retourne le nombre d'éléments dans le tableau
@@ -53,88 +55,158 @@ class Tableau{
 template <class T>
 Tableau<T>::Tableau(int capacite_)
 {
-    // À compléter
-    elements = new T[1024]; // cette ligne n'est peut-être pas bonne.
+
+ nbElements = 0;
+capacite = capacite_ ;
+  elements = new T[1024]; // cette ligne n'est peut-être pas bonne.
 }
 
 template <class T>
 Tableau<T>::Tableau(const Tableau& autre)
 {
-    // À compléter
+   capacite =autre.capacite;
+nbElements= autre.nbElements;
+elements = new T [capacite];
+for (int i =0; i<nbElements; i++)
+  elements[i] = autre.elements[i];
 }
 
 template <class T>
 Tableau<T>::~Tableau()
 {
-    // À compléter
+
+  delete [] elements;
+
 }
 
 template <class T>
 int Tableau<T>::taille() const
 {
-    // À compléter
-    return 0;
+
+    return  nbElements;
 }
 
 template <class T>
 void Tableau<T>::ajouter(const T& item)
 {
-    // À compléter
+
+assert(nbElements <= capacite);
+if (nbElements == capacite)
+redimensionner();
+   elements[nbElements++] = item;
+}
+
+template <class T>
+ void Tableau <T> :: redimensionner (){
+  capacite*=2;
+  T* temp = new T[capacite];
+  for(int i=0; i < nbElements ; i++){
+    temp[i] = elements[i];
+}
+
+    delete [] elements;
+   elements = temp;
 }
 
 template <class T>
 void Tableau<T>::inserer(const T& element, int index)
 {
-    // À compléter
+
+  assert(index >=0 && index < nbElements);
+  if (nbElements == capacite){
+       redimensionner();
+  }
+  for(int i = nbElements++; i>index; i--){
+    elements[i] = elements[i-1];
+
+  }
+  elements[index] = element;
+
 }
 
 template <class T>
 void Tableau<T>::enlever(int index)
 {
-    // À compléter
+    assert (index >=0 && index <nbElements);
+    nbElements--;
+    for (int i = index; i<nbElements; i++){
+      elements[i] = elements[i+1];
+
+    }
+
 }
 
 template <class T>
 int Tableau<T>::chercher(const T& element)
 {
-    // À compléter
-    // Voir la fonction Tableau<T>::contient() dans les notes de cours (Section 4.7).
-    // Il suffit de l'adapter pour retourner la position au lieu d'un booléen.
+
+  for(int i = 0; i<nbElements; i++){
+    if(elements[i] == element)
+      return i;
+  }
+
     return -1;
 }
 
 template <class T>
 void Tableau<T>::vider()
 {
-    // À compléter
+    nbElements =0;
 }
 
 template <class T>
 const T& Tableau<T>::operator[] (int index) const
 {
-    // À compléter
-    return elements[0];
+
+ assert (index >= 0 && index <nbElements);
+    return elements[index];
 }
 
 template <class T>
 T& Tableau<T>::operator[] (int index)
 {
-    // À compléter
-    return elements[0];
+
+    assert (index >= 0 && index <nbElements);
+    return elements[index];
 }
 
 template <class T>
 Tableau<T>& Tableau<T>::operator = (const Tableau<T>& autre)
 {
-    // À compléter
+  if (!(&autre==this)){
+    capacite = autre.capacite;
+    nbElements = autre.nbElements;
+    delete[] elements;
+    elements = new T [capacite];
+
+    for(int i=0;i<nbElements;i++){
+     elements[i] = autre.elements[i];
+    }
+
+  }
+
+
     return *this;
+
 }
 
 template <class T>
 bool Tableau<T>::operator == (const Tableau<T>& autre) const
 {
-    // À compléter
-    return false;
+
+if (this == &autre) return true;
+
+bool egal = (nbElements == autre.nbElements);
+int i = 0;
+while (egal && i<nbElements){
+   if (elements[i] != autre.elements[i]){
+    egal = false;
+   }
+   i++;
+
+}
+return egal;
+
 }
 
 #endif //define _TABLEAU___H_

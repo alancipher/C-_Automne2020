@@ -11,6 +11,7 @@ class Pile
 {
   public:
     Pile();
+    Pile(const Pile& );
     ~Pile();
 
     void empiler(const T&);
@@ -41,6 +42,19 @@ template <class T>
 Pile<T>::Pile()
 {
     sommet = nullptr;
+}
+
+template <class T>
+Pile<T>::Pile(const Pile<T> &autre)
+{
+    Cellule** t = &sommet ; // pointeur sur le pointeur sommet
+    Cellule* i = autre.sommet ;
+    while (i){
+    *t = new Cellule (i-> contenu, nullptr);
+    t=  &((*t)->suivante);
+    i = i->suivante;
+    }
+
 }
 
 template <class T>
