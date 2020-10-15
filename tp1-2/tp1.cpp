@@ -13,15 +13,17 @@
 // Fonction princiale du TP1 : lecture et traitement des requêtes
 int tp1(const Carte& carte, std::istream& in)
 {
+   int  indice =0;
     while(in){
         Coordonnees c;
         in >> c;
         if(in){
-           std::string adresse = carte.geocodageinverse(c);
+           std::string adresse = carte.geocodageinverse(c, indice);
          std::cout << adresse << std::endl;
         }
         in >> std::ws;
         //Tableau <Route> routes,const  Coordonnees& p
+        indice++;
     }
     return 0; // fin normale
 }
@@ -45,6 +47,10 @@ int main(int argc, const char** argv)
             return 2;
         }
         fcarte >> carte;
+        //  std::cout <<carte << std::endl;
+
+      //  for (int i = 0 ; i<carte.routes.taille(); i++)
+        // std::cout <<carte.routes[i]<< std::endl;
     }
     if(argc<3)
         return tp1(carte, std::cin); // Si un seul argument, lire depuis l'entrée standard (clavier ou fichier redirigé).

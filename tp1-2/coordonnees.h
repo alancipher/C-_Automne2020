@@ -19,7 +19,7 @@ class Coordonnees {
    Coordonnees nouveauVecteur(const Coordonnees&)const;
    Coordonnees projectionCoor(const Coordonnees&)const;
     Coordonnees additionner(const Coordonnees&)const;
-  private:
+  public:
     double latitude;
     double longitude;
 

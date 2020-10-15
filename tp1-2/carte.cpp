@@ -16,6 +16,85 @@
 //std::string Carte::geocodageinverse(const Coordonnees& c) const
 //std:: string Carte :: geocodageinverse(Tableau <Route> routes,const  Coordonnees& p)const
 
+
+
+std:: string Carte :: geocodageinverse(const  Coordonnees& p, int compteur)const
+{
+  std ::string adresse = "";
+ double  distMin = 6371001 *3, longueur=0, long2, longdist;
+ int numeroPorte;
+Coordonnees c,d, prim, vecteurCD, vecteurCP, vecProject, nouvPoint;
+
+//  std::cout << "-------"<< std::endl;
+  for (int j = 1; j <routes[compteur].cor.taille() ;j++ ){
+ c = routes[compteur].cor[j-1];
+ //  std::cout << c.latitude<< "-"<< c.longitude<< std::endl;
+ //std::cout << "ICI"<< std::endl;
+   d = routes[compteur].cor[j];
+   // determiner les vecteurs V(cd) et V(cp)
+   vecteurCP = c.nouveauVecteur(p);
+   vecteurCD = c.nouveauVecteur(d);
+   vecProject =  vecteurCP.projectionCoor(vecteurCD);
+     nouvPoint = c.additionner(vecProject); // on va redefinir l'operateur = pour ce class
+                                           // addition de deux vecteur
+
+     if (p.distance(nouvPoint) < distMin){
+       distMin = p.distance(nouvPoint);
+
+       long2 = longueur + c.distance(nouvPoint);
+      //  std::cout << long2 - longueur<< std::endl;
+
+
+       longdist = long2 + nouvPoint.distance(d);
+
+
+         numeroPorte = round(((longdist -long2)/(longdist-longueur))*routes[compteur].porteDebut+
+                              ((long2-longueur)/(longdist-longueur))* routes[compteur].portFin);
+
+            adresse = std::to_string(numeroPorte) + " " + routes[compteur].nom ;
+
+
+     }
+
+  longueur += c.distance(d);
+}
+
+
+    return adresse;
+  }
+
+
+
+
+  /*si a la longueur 0 correspond porteDebut
+  alors a quoi va correspondre porte a
+       si porteDebut-> 0,005
+        numeroPorte -> long2
+  */
+
+
+
+
+  //if (c.distance(nouvPoint)< nouvPoint.distance(d)){
+ //  numPort2 =round(long2*routes[compteur].porteDebut/longtest);
+
+  //std::cout << longdist<< "-"<< long2<< "-"<<longueur<< std::endl;
+/*  std::cout << longdist<< std::endl;
+  std::cout << long2<< std::endl;
+  std::cout << longueur<< std::endl;
+  std::cout << numeroPorte<< std::endl;
+  std::cout << "--------"<< std::endl;
+} else if (c.distance(nouvPoint)> nouvPoint.distance(d)){
+std::cout << long2<< std::endl;
+numeroPorte = round((longdist -long2)/(longdist-longueur)*routes[compteur].portFin +
+                        (long2-longueur)/(longdist-longueur)* routes[compteur].porteDebut);
+}*/
+
+
+
+
+
+/*
 std:: string Carte :: geocodageinverse(const  Coordonnees& p)const
 {
   std ::string adresse = "";
@@ -24,8 +103,12 @@ std:: string Carte :: geocodageinverse(const  Coordonnees& p)const
 Coordonnees c,d, prim, vecteurCD, vecteurCP, vecProject, nouvPoint;
  for (int i = 0; i < routes.taille(); i++){
      longueur =0;
-   for (int j = 1; j <routes[i].cor.taille()-1 ;i++ ){
+       //std::cout << "HERE"<< std::endl;
+        std::cout << routes[i].nom<< std::endl;
+   for (int j = 10; j <routes[i].cor.taille() ;j++ ){
     c = routes[i].cor[j-1];
+  //  std::cout << c.latitude<< "-"<< c.longitude<< std::endl;
+  std::cout << "ICI"<< std::endl;
     d = routes[i].cor[j];
     // determiner les vecteurs V(cd) et V(cp)
     vecteurCP = c.nouveauVecteur(p);
@@ -53,59 +136,77 @@ Coordonnees c,d, prim, vecteurCD, vecteurCP, vecProject, nouvPoint;
                            (long2-longueur)/(longdist-longueur)* routes[i].portFin);
   }
 
-        //  init.append(add);
-        //  adresse.append();
-     //std::to_string(i
         adresse = std::to_string(numeroPorte) + " " + routes[i].nom ;
    longueur += c.distance(d);
 }
 
 }
 
-    return "YES";
-}
+    return adresse;
+}*/
+
+
+
 
 std::istream& operator >> (std::istream& is, Route& route)
 {
     // Code à compléter...
+  char  deuxpoint, tiret, virgule;
 
-    // exemple de ligne à lire:
-    //  Rue_Jeanne-Mance : 2020 - 2098 : (45.50838,-73.56894) , (45.50915,-73.57062) ;
-    int entier;
-    char temp;
-    std::string chaine;
-
+  if (is){
     // Lecture du nom de rue
-    is >> chaine;
-    if(!is || chaine.empty()) // détecter une anomalie ou la fin du fichier...
+    is >> route.nom;
+
+    if(!is || ((std::string)route.nom).empty()) // détecter une anomalie ou la fin du fichier...
         return is;
-    is >> temp;
-    assert(temp==':');
+    is >> deuxpoint;
+    assert(deuxpoint==':');
 
     // Lecture de l'intervalle des numéros de porte
-    is >> entier >> temp >> entier;
-    assert(temp=='-');
+    is >> route.porteDebut >> tiret >> route.portFin;
+    assert(tiret=='-');
 
-
-    is >> temp;
-    assert(temp==':');
+    is >> deuxpoint;
+    assert(deuxpoint==':');
 
     // Lecture des coordonnées
     Coordonnees c;
-    is >> c >> temp;
-    while(temp==',')
-        is >> c >> temp;
-    assert(temp==';');
+    /*is >> c >> virgule;
+    route.cor.ajouter(c);
+    while(virgule==','){
+        is >> c >> virgule;
+        route.cor.ajouter(c);
+      }*/
+      do{
+        is >> c >> virgule;
+        route.cor.ajouter(c);
+      }while(virgule==',');
+    assert(virgule==';');
+  }
     return is;
 }
+
+
+/*std::ostream&  operator <<  (std::ostream& os, Route& route){
+  os << "("
+     << route.porteDebut
+     << ","
+     << route.portFin
+     << ")";
+  return os;
+
+}*/
 
 std::istream& operator >> (std::istream& is, Carte& carte)
 {
     // Code à compléter...
+
     while(is){
         Route route;
         is >> route
            >> std::ws; // force la lecture des espaces blancs.
+           carte.routes.ajouter(route);
+
     }
     return is;
 }
