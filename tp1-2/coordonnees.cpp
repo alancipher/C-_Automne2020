@@ -16,7 +16,7 @@ Coordonnees :: Coordonnees(){
 }
 
 Coordonnees :: Coordonnees (double lat_,double long_)
-: latitude(lat_*PI / 180.0), longitude(long_*PI / 180.0)
+: latitude(lat_), longitude(long_)
 {
 
 }
@@ -35,16 +35,15 @@ Coordonnees Coordonnees:: nouveauVecteur(const Coordonnees& coor)const{
 }
  Coordonnees Coordonnees :: projectionCoor(const Coordonnees& coor)const{
    double produitCaCd = coor.latitude *latitude+ coor.longitude*longitude;
-   double produitCd = pow(2,coor.latitude)+ pow(2,coor.longitude);
+   double produitCd = coor.latitude *coor.latitude+ coor.longitude*coor.longitude;
    double rapport = produitCaCd/ produitCd;
-   if(rapport > 1) rapport= 1;
+   if(rapport >= 1) rapport= 1;
 
-   if(rapport <0){
-     rapport =0;
-    Coordonnees nouvVecteur1(rapport*latitude, rapport*longitude);
-    return nouvVecteur1;
-   }
-   
+   if(rapport <=0) rapport =0;
+//    Coordonnees nouvVecteur1(rapport*coor.latitude, rapport*coor.longitude);
+  //  return nouvVecteur1;
+  // }
+
    Coordonnees nouvVecteur(rapport*coor.latitude, rapport*coor.longitude);
    return nouvVecteur;
  }

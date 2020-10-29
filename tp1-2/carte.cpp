@@ -21,47 +21,53 @@
 std:: string Carte :: geocodageinverse(const  Coordonnees& p, int compteur)const
 {
   std ::string adresse = "";
- double  distMin = 6371001 *3, longueur=0, long2, longdist;
+ double  distMin = 6371001 *3, longueur, long2, longdist;
  int numeroPorte;
 Coordonnees c,d, prim, vecteurCD, vecteurCP, vecProject, nouvPoint;
 
-//  std::cout << "-------"<< std::endl;
-  for (int j = 1; j <routes[compteur].cor.taille() ;j++ ){
- c = routes[compteur].cor[j-1];
- //  std::cout << c.latitude<< "-"<< c.longitude<< std::endl;
- //std::cout << "ICI"<< std::endl;
-   d = routes[compteur].cor[j];
-   // determiner les vecteurs V(cd) et V(cp)
+for(int i = 0; i<routes.taille(); i++){
+    longueur =0;
+  for (int j = 1; j <routes[i].cor.taille() ;j++ ){
+   c = routes[i].cor[j-1];
+
+   d = routes[i].cor[j];
    vecteurCP = c.nouveauVecteur(p);
    vecteurCD = c.nouveauVecteur(d);
    vecProject =  vecteurCP.projectionCoor(vecteurCD);
-     nouvPoint = c.additionner(vecProject); // on va redefinir l'operateur = pour ce class
-                                           // addition de deux vecteur
-
+     nouvPoint = c.additionner(vecProject);
      if (p.distance(nouvPoint) < distMin){
        distMin = p.distance(nouvPoint);
 
        long2 = longueur + c.distance(nouvPoint);
-      //  std::cout << long2 - longueur<< std::endl;
-
 
        longdist = long2 + nouvPoint.distance(d);
+    //   if( c.distance(nouvPoint) < nouvPoint.distance(d))
+    /*
+        numeroPorte = round(((longdist -long2)/(longdist-longueur))*routes[i].porteDebut+
+                              ((long2-longueur)/(longdist-longueur))* routes[i].portFin);
+     */
+
+     numeroPorte = round(((longdist -long2)/(longdist-longueur))*routes[i].porteDebut+
+                           ((long2-longueur)/(longdist-longueur))* routes[i].portFin);
+
+     
 
 
-         numeroPorte = round(((longdist -long2)/(longdist-longueur))*routes[compteur].porteDebut+
-                              ((long2-longueur)/(longdist-longueur))* routes[compteur].portFin);
+  /*    if( c.distance(nouvPoint) >= nouvPoint.distance(d))
+         numeroPorte = round(((longdist -long2)/(longdist-longueur))*routes[i].porteDebut+
+                             ((long2-longueur)/(longdist-longueur))* routes[i].portFin);
+       */
 
-            adresse = std::to_string(numeroPorte) + " " + routes[compteur].nom ;
-
+            if(routes[i].porteDebut%2 ==0&&numeroPorte%2!=0 ) numeroPorte--;
+             if(routes[i].porteDebut%2 !=0&&numeroPorte%2==0 ) numeroPorte--;
+           adresse = std::to_string(numeroPorte) + " " + routes[i].nom ;
 
      }
-
   longueur += c.distance(d);
 }
-
-
+}
     return adresse;
-  }
+}
 
 
 

@@ -1,0 +1,30 @@
+#Machine :  MacBooks-MacBook-Pro.local
+#CPU :?
+#Date début : 20201016_142824
+#Limite de 3600 secondes par test
+#
+#Test	Requêtes	CPU	Mém	Num	Rue	Num+-2
+4rues-req0.txt	       5	0.00	0	0	0
+4rues-req1.txt	      10	0.00	0	0	0
+4rues-req2.txt	     100	0.00	0	0	0
+4rues-req3.txt	    1000	0.00	0	0	0
+4rues-req4.txt	    5000	0.00	0	0	0
+4rues-req5.txt	   10000	0.00	0	0	0
+st-cesaire-req0.txt	       1	0.00	0	0	0
+st-cesaire-req1.txt	      10	0.00	0	0	0
+st-cesaire-req2.txt	     100	0.00	0	0	0
+st-cesaire-req3.txt	    1000	0.00	0	0	0
+st-cesaire-req4.txt	    5000	0.00	0	0	0
+st-cesaire-req5.txt	   10000	0.00	0	0	0
+sherbrooke-req0.txt	       1	0.00	0	0	0
+sherbrooke-req1.txt	      10	0.00	0	0	0
+sherbrooke-req2.txt	     100	0.00	0	0	0
+sherbrooke-req3.txt	    1000	0.00	0	0	0
+sherbrooke-req4.txt	    5000	0.00	0	0	0
+sherbrooke-req5.txt	   10000	0.00	0	0	0
+montreal-req0.txt	       1	0.00	0	0	0
+montreal-req1.txt	      10	0.00	0	0	0
+montreal-req2.txt	     100	0.00	0	0	0
+montreal-req3.txt	    1000	0.00	0	0	0
+montreal-req4.txt	    5000	0.00	0	0	0
+montreal-req5.txt	   10000	0.00	0	0	0

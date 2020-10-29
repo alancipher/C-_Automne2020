@@ -158,10 +158,12 @@ template <class T>
 const T& Tableau<T>::operator[] (int index) const
 {
 
- assert (index >= 0 && index <nbElements);
+ assert (index >= 0 && index <nbElements );
     return elements[index];
 }
 
+
+// gddhskaa pdkdldl
 template <class T>
 T& Tableau<T>::operator[] (int index)
 {

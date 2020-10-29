@@ -1,0 +1,8 @@
+#Rapport de correction INF3105 / 
+#Date:	20201016_142627
+#Machine :	 MacBooks-MacBook-Pro.local
+#CPU :	?
+
+#						4rues-req0.txt						4rues-req1.txt						4rues-req2.txt						4rues-req3.txt						4rues-req4.txt						4rues-req5.txt						st-cesaire-req0.txt						st-cesaire-req1.txt						st-cesaire-req2.txt						st-cesaire-req3.txt						st-cesaire-req4.txt						st-cesaire-req5.txt						sherbrooke-req0.txt						sherbrooke-req1.txt						sherbrooke-req2.txt						sherbrooke-req3.txt						sherbrooke-req4.txt						sherbrooke-req5.txt						montreal-req0.txt						montreal-req1.txt						montreal-req2.txt						montreal-req3.txt						montreal-req4.txt						montreal-req5.txt						
+#Soumission	Check1	Taille sources		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2		CPU	Mém	Num	Rue	Num+-2
+.	       0	     656    1844   16730 total		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0		0.00	0	0	0
